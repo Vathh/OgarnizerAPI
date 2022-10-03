@@ -36,12 +36,14 @@ try
     {
         cfg.RequireHttpsMetadata = false;
         cfg.SaveToken = true;
+#pragma warning disable CS8604 // Possible null reference argument.
         cfg.TokenValidationParameters = new TokenValidationParameters
         {
             ValidIssuer = authenticationSettings.JwtIssuer,
             ValidAudience = authenticationSettings.JwtIssuer,
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authenticationSettings.JwtKey))
         };
+#pragma warning restore CS8604 // Possible null reference argument.
     });
 
     builder.Services.AddControllersWithViews();

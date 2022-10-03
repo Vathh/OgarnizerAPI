@@ -15,17 +15,18 @@ namespace OgarnizerAPI
         {
             if (_dbContext.Database.CanConnect())
             {
-                if (!_dbContext.Users.Any())
-                {
-                    var users = GetUsers();
-                    _dbContext.Users.AddRange(users);
-                    _dbContext.SaveChanges();
-                }
-
                 if (!_dbContext.Roles.Any())
                 {
                     var roles = GetRoles();
                     _dbContext.Roles.AddRange(roles);
+                    _dbContext.SaveChanges();
+                }
+#pragma warning disable CS8604 // Possible null reference argument.
+
+                if (!_dbContext.Users.Any())
+                {
+                    var users = GetUsers();
+                    _dbContext.Users.AddRange(users);
                     _dbContext.SaveChanges();
                 }
 
@@ -69,7 +70,8 @@ namespace OgarnizerAPI
                     var closedOrders = GetClosedOrders();
                     _dbContext.ClosedOrders.AddRange(closedOrders);
                     _dbContext.SaveChanges();
-                }      
+                }
+#pragma warning restore CS8604 // Possible null reference argument.
             }
         }        
 
