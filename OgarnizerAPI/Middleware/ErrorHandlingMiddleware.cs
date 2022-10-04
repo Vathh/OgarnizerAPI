@@ -17,12 +17,6 @@ namespace OgarnizerAPI.Middleware
             {
                 await next.Invoke(context);
             }
-            /*
-             * catch(ForbidException forbidException)
-            {
-                context.Response.StatusCode = 403;
-            }
-             */
             catch (BadRequestException badRequestException)
             {
                 context.Response.StatusCode = 400;
@@ -35,7 +29,9 @@ namespace OgarnizerAPI.Middleware
             }
             catch (Exception e)
             {
+#pragma warning disable CA2254 // Template should be a static expression
                 _logger.LogError(e, e.Message);
+#pragma warning restore CA2254 // Template should be a static expression
 
                 context.Response.StatusCode = 500;
                 await context.Response.WriteAsync("Something went wrong");

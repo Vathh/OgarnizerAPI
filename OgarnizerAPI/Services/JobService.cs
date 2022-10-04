@@ -25,11 +25,13 @@ namespace OgarnizerAPI.Services
             // _authorizationService = authorizationService;
             // _userContextService = userContextService;
         }
-
+#pragma warning disable CS8604 // Possible null reference argument.
         public void Delete(int id) 
         {
             var message = $"Job with id: {id} DELETE action invoked";
+#pragma warning disable CA2254 // Template should be a static expression
             _logger.LogError(message);
+#pragma warning restore CA2254 // Template should be a static expression
 
             var job = _dbContext
                 .Jobs
@@ -87,11 +89,13 @@ namespace OgarnizerAPI.Services
 
         public PagedResult<JobDto> GetAll(JobQuery query)
         {
+
             var baseQuery = _dbContext
                             .Jobs
                             .Include(r => r.User)
                             .Where(r => query.SearchPhrase == null ||
                                         (r.Place.ToLower().Contains(query.SearchPhrase.ToLower()) || r.CreatedDate.Equals(query.SearchPhrase)));
+#pragma warning restore CS8604 // Possible null reference argument.
 
             if (!string.IsNullOrEmpty(query.SortBy))
             {

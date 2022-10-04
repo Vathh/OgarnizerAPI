@@ -20,8 +20,6 @@ namespace OgarnizerAPI.Services
 #pragma warning disable CS8603 // Possible null reference return.
         public ClaimsPrincipal User => _httpContextAccessor.HttpContext?.User;
 #pragma warning restore CS8603 // Possible null reference return.
-#pragma warning disable CS8602 // Dereference of a possibly null reference.
         public int? GetUserId => User is null ? null : (int?)int.Parse(User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier).Value);
-#pragma warning restore CS8602 // Dereference of a possibly null reference.
     }
 }

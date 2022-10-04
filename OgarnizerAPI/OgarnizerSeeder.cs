@@ -13,6 +13,7 @@ namespace OgarnizerAPI
 
         public void Seed()
         {
+#pragma warning disable CS8604 // Possible null reference argument.
             if (_dbContext.Database.CanConnect())
             {
                 if (!_dbContext.Roles.Any())
@@ -21,7 +22,6 @@ namespace OgarnizerAPI
                     _dbContext.Roles.AddRange(roles);
                     _dbContext.SaveChanges();
                 }
-#pragma warning disable CS8604 // Possible null reference argument.
 
                 if (!_dbContext.Users.Any())
                 {
@@ -73,8 +73,8 @@ namespace OgarnizerAPI
                 }
 #pragma warning restore CS8604 // Possible null reference argument.
             }
-        }        
-
+        }
+#pragma warning disable CA1822 // Mark members as static
         private IEnumerable<User> GetUsers()
         {
             var users = new List<User>()
@@ -113,6 +113,7 @@ namespace OgarnizerAPI
         }
 
         private IEnumerable<ClosedJob> GetClosedJobs()
+
         {
             var closedJobs = new List<ClosedJob>()
             {
@@ -360,3 +361,5 @@ namespace OgarnizerAPI
         }
     }
 }
+
+#pragma warning restore CA1822 // Mark members as static

@@ -38,7 +38,7 @@ namespace OgarnizerAPI.Services
             _dbContext.Users.Add(newUser);
             _dbContext.SaveChanges();
         }
-
+#pragma warning disable CS8604 // Possible null reference argument.
         public string GenerateJwt(LoginUserDto dto)
         {
             var user = _dbContext.Users
@@ -61,15 +61,11 @@ namespace OgarnizerAPI.Services
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Name, user.Name.ToString()),
                 new Claim(ClaimTypes.Role, user.Role.Name.ToString())
-                // new Claim("DateOfBirth", user.DateOfBirth.Value.ToString("yyyy-MM-dd")),
             };
 
-            /*if (!string.IsNullOrEmpty(user.Nationality){
-                claims.Add(
-                    new Claim("Nationality", user.Nationality));
-            }*/
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_authenticationSettings.JwtKey));
+
             var cred = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
             var expires = DateTime.Now.AddDays(_authenticationSettings.JwtExpireDays);
 
@@ -84,3 +80,4 @@ namespace OgarnizerAPI.Services
         }
     }
 }
+#pragma warning restore CS8604 // Possible null reference argument.
