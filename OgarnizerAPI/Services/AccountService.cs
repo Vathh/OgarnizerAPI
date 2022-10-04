@@ -9,6 +9,7 @@ using OgarnizerAPI.Exceptions;
 using OgarnizerAPI.Interfaces;
 using OgarnizerAPI.Models;
 using OgarnizerAPI.Models.CreateDtos;
+using OgarnizerAPI.Models.User;
 
 namespace OgarnizerAPI.Services
 {
@@ -39,6 +40,27 @@ namespace OgarnizerAPI.Services
             _dbContext.SaveChanges();
         }
 #pragma warning disable CS8604 // Possible null reference argument.
+        public void DeleteUser(DeleteUserDto dto)
+        {
+            var user = _dbContext.Users.FirstOrDefault(x => x.Name == dto.Name);
+
+            if (user is null)
+            {
+                throw new NotFoundException("User not found");
+            }
+
+            if(user.Name == dto.Name && user.Login == dto.Login)
+            {
+                _dbContext.Users.Remove(user);
+                _dbContext.SaveChanges();
+            }
+            else
+            {
+                throw new BadRequestException("Wrong name or login");
+            }
+
+        }
+
         public string GenerateJwt(LoginUserDto dto)
         {
             var user = _dbContext.Users

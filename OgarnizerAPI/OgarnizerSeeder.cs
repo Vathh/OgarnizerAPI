@@ -1,14 +1,19 @@
-﻿using OgarnizerAPI.Entities;
+﻿using Microsoft.AspNetCore.Identity;
+using OgarnizerAPI.Entities;
 
 namespace OgarnizerAPI
 {
     public class OgarnizerSeeder
     {
         private readonly OgarnizerDbContext _dbContext;
+        private readonly IPasswordHasher<User> _passwordHasher;
+        private readonly IConfiguration _config;
 
-        public OgarnizerSeeder(OgarnizerDbContext dbContext)
+        public OgarnizerSeeder(OgarnizerDbContext dbContext, IPasswordHasher<User> passwordHasher, IConfiguration config)
         {
             _dbContext = dbContext;
+            _passwordHasher = passwordHasher;
+            _config = config;
         }
 
         public void Seed()
@@ -27,6 +32,13 @@ namespace OgarnizerAPI
                 {
                     var users = GetUsers();
                     _dbContext.Users.AddRange(users);
+                    _dbContext.SaveChanges();
+                }
+
+                if (!_dbContext.Users.Any(x => x.Name == "admin"))
+                {
+                    var adminUser = AddAdminUser();
+                    _dbContext.Users.Add(adminUser);
                     _dbContext.SaveChanges();
                 }
 
@@ -75,8 +87,23 @@ namespace OgarnizerAPI
             }
         }
 #pragma warning disable CA1822 // Mark members as static
-        private IEnumerable<User> GetUsers()
+        private User AddAdminUser()
         {
+            var adminUser = new User()
+            {
+                Name = "admin",
+                Login = "admin",
+                RoleId = 2
+            };
+
+            var hashedAdminPassword = _passwordHasher.HashPassword(adminUser, _config.GetValue<string>("AdminPassword"));
+
+            adminUser.PasswordHash = hashedAdminPassword;           
+
+            return adminUser;
+        }
+        private IEnumerable<User> GetUsers()
+        {           
             var users = new List<User>()
             {
                 new User()

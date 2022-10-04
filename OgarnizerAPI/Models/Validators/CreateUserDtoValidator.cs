@@ -21,6 +21,7 @@ namespace OgarnizerAPI.Models.Validators
                 .MinimumLength(8)
                 .Custom((value, context) =>
                 {
+#pragma warning disable CS8604 // Possible null reference argument.
                     var loginInUse = dbContext.Users.Any(u => u.Login == value);
                     if (loginInUse)
                     {
@@ -30,3 +31,4 @@ namespace OgarnizerAPI.Models.Validators
         }
     }
 }
+#pragma warning restore CS8604 // Possible null reference argument.

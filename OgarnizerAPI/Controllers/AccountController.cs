@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OgarnizerAPI.Interfaces;
 using OgarnizerAPI.Models;
 using OgarnizerAPI.Models.CreateDtos;
+using OgarnizerAPI.Models.User;
 
 namespace OgarnizerAPI.Controllers
 {
@@ -17,6 +19,7 @@ namespace OgarnizerAPI.Controllers
         }
 
         [HttpPost("register")]
+        [Authorize(Roles = "Admin")]
         public ActionResult CreateUser([FromBody]CreateUserDto dto)
         {
             _accountService.CreateUser(dto);
@@ -29,6 +32,15 @@ namespace OgarnizerAPI.Controllers
         {
             var token = _accountService.GenerateJwt(dto);
             return Ok(token);
+        }
+
+        [HttpPost("delete")]
+        [Authorize(Roles = "Admin")]
+        public ActionResult DeleteUser([FromBody] DeleteUserDto dto)
+        {
+            _accountService.DeleteUser(dto);
+
+            return Ok();
         }
     }
 }
