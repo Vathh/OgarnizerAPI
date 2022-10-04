@@ -9,5 +9,7 @@ namespace OgarnizerAPI.Services
         JobDto? GetById(int id);    
         void Delete(int id);    
         void Update(int id, UpdateJobDto dto); 
+
+        void Close(int id, bool isDone);
     }
 }

@@ -20,24 +20,7 @@ namespace OgarnizerAPI.Controllers
             _jobService = jobService;
         }
 
-        [HttpDelete("{id}")]
-        public ActionResult Delete([FromRoute] int id)
-        {
-            _jobService.Delete(id); 
-
-            return NoContent();
-        }
-
-        [HttpPut("{id}")]
-        public ActionResult Update([FromRoute] int id, [FromBody] UpdateJobDto dto)
-        {
-            _jobService.Update(id, dto); 
-
-            return NotFound();
-        }
-
         [HttpPost]
-        //[Authorize(Roles = "Manager")]
         public ActionResult CreateJob([FromBody] CreateJobDto dto)
         {            
             var id = _jobService.Create(dto); 
@@ -45,12 +28,10 @@ namespace OgarnizerAPI.Controllers
             return Created($"/api/ogarnizer/{id}", null);
         }
 
-        [HttpGet]        
-        //[Authorize(Policy = "HasNationality")]
-        //[Authorize(Policy = "Atleast20"}]  albo Policy = "CreatedAtleast2Jobs"
-        public ActionResult<IEnumerable<JobDto>> GetAll([FromQuery]JobQuery query)
+        [HttpGet]
+        public ActionResult<IEnumerable<JobDto>> GetAll([FromQuery] JobQuery query)
         {
-            var jobsDtos = _jobService.GetAll(query); 
+            var jobsDtos = _jobService.GetAll(query);
 
             return Ok(jobsDtos);
         }
@@ -60,8 +41,32 @@ namespace OgarnizerAPI.Controllers
         public ActionResult<JobDto> Get([FromRoute] int id)
         {
             var job = _jobService.GetById(id);
-            
+
             return Ok(job);
+        }
+
+        [HttpPut("{id}")]
+        public ActionResult Update([FromRoute] int id, [FromBody] UpdateJobDto dto)
+        {
+            _jobService.Update(id, dto);
+
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public ActionResult Delete([FromRoute] int id)
+        {
+            _jobService.Delete(id); 
+
+            return NoContent();
+        }
+
+        [HttpPost("{id}")]
+        public ActionResult CloseJob([FromRoute] int id, [FromRoute] bool isDone)
+        {
+            _jobService.Close(id, isDone);
+
+            return Ok();
         }
     }
 }

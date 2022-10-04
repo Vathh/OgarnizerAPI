@@ -7,77 +7,38 @@ using OgarnizerAPI.Models;
 
 namespace OgarnizerAPI.Services
 {
+#pragma warning disable CS8604 // Possible null reference argument.
+#pragma warning disable CS8603 // Possible null reference return.
+#pragma warning disable CA2254 // Template should be a static expression
     public class JobService : IJobService
     {
         private readonly OgarnizerDbContext _dbContext;
         private readonly IMapper _mapper;
         private readonly ILogger<JobService> _logger;
-        //private readonly IAuthorizationService _authorizationService;
-        //private readonly IUserContextService _userContextService;
+        private readonly IUserContextService _userContextService;
 
-        public JobService(OgarnizerDbContext dbContext, IMapper mapper, ILogger<JobService> logger)
-            // + IAuthorizationService authorizationService
-            // + IUserContextService userContextService
+        public JobService(OgarnizerDbContext dbContext, IMapper mapper, ILogger<JobService> logger, IUserContextService userContextService)
         {
             _dbContext = dbContext;
             _mapper = mapper;
             _logger = logger;
-            // _authorizationService = authorizationService;
-            // _userContextService = userContextService;
+            _userContextService = userContextService;
         }
-#pragma warning disable CS8604 // Possible null reference argument.
-        public void Delete(int id) 
+        public int Create(CreateJobDto dto)
         {
-            var message = $"Job with id: {id} DELETE action invoked";
-#pragma warning disable CA2254 // Template should be a static expression
-            _logger.LogError(message);
-#pragma warning restore CA2254 // Template should be a static expression
-
-            var job = _dbContext
-                .Jobs
-                .FirstOrDefault(x => x.Id == id);
-
-            if (job is null)
-            {
-                throw new NotFoundException("Job not found");
-            }
-
-            // var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User , job, new ResourceOperationRequirement(ResourceOperation.Delete)).Result;
-            //if(!authorizationResult.Succeeded)
-            // throw new ForbidException();
-
-            _dbContext.Jobs.Remove(job);
+            var job = _mapper.Map<Job>(dto);
+            _dbContext.Jobs.Add(job);
             _dbContext.SaveChanges();
+
+            return job.Id;
         }
-
-        public void Update(int id, UpdateJobDto dto) 
-        {
-
-            var job = _dbContext
-                .Jobs
-                .FirstOrDefault(x => x.Id == id);
-
-            if  (job is null) 
-            { 
-                throw new NotFoundException("Job not found"); 
-            }
-
-            // var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User , job, new ResourceOperationRequirement(ResourceOperation.Update)).Result;
-            //if(!authorizationResult.Succeeded)
-            // throw new ForbidException();
-
-
-            job.UpdateInfo = dto.UpdateInfo;
-            _dbContext.SaveChanges();
-        }
-
         public JobDto? GetById(int id)
         {
             var job = _dbContext
                 .Jobs
                 .FirstOrDefault(x => x.Id == id);
 
-            if (job is null) 
+            if (job is null)
             {
                 throw new NotFoundException("Job not found");
             };
@@ -95,28 +56,28 @@ namespace OgarnizerAPI.Services
                             .Include(r => r.User)
                             .Where(r => query.SearchPhrase == null ||
                                         (r.Place.ToLower().Contains(query.SearchPhrase.ToLower()) || r.CreatedDate.Equals(query.SearchPhrase)));
-#pragma warning restore CS8604 // Possible null reference argument.
+
 
             if (!string.IsNullOrEmpty(query.SortBy))
             {
-#pragma warning disable CS8603 // Possible null reference return.
-                var columnsSelectors = new Dictionary<string, Expression<Func<Job, object>>> 
+
+                var columnsSelectors = new Dictionary<string, Expression<Func<Job, object>>>
                 {
                     {nameof(Job.Place), r => r.Place},
                     {nameof(Job.Description), r => r.Description},
                     {nameof(Job.Object), r => r.Object}
                 };
-#pragma warning restore CS8603 // Possible null reference return.
+
 
                 var selectedColumn = columnsSelectors[query.SortBy];
 
-                baseQuery = query.SortDirection == SortDirection.ASC ? 
-                                    baseQuery.OrderBy(selectedColumn) 
+                baseQuery = query.SortDirection == SortDirection.ASC ?
+                                    baseQuery.OrderBy(selectedColumn)
                                     : baseQuery.OrderByDescending(selectedColumn);
             }
 
             var jobs = baseQuery
-                        .Skip(query.PageSize * (query.PageNumber -1))
+                        .Skip(query.PageSize * (query.PageNumber - 1))
                         .Take(query.PageSize)
                         .ToList();
 
@@ -128,16 +89,75 @@ namespace OgarnizerAPI.Services
 
             return result;
         }
-
-        public int Create(CreateJobDto dto)
+        public void Update(int id, UpdateJobDto dto)
         {
-            var job = _mapper.Map<Job>(dto);
-            //job.UserId = _userContextService.GetUserId;
-            _dbContext.Jobs.Add(job);
+
+            var job = _dbContext
+                .Jobs
+                .FirstOrDefault(x => x.Id == id);
+
+            if (job is null)
+            {
+                throw new NotFoundException("Job not found");
+            }
+
+
+            job.UpdateInfo = dto.UpdateInfo;
             _dbContext.SaveChanges();
-
-            return job.Id;
         }
+        public void Delete(int id) 
+        {
+            var message = $"Job with id: {id} DELETE action invoked";
 
+            _logger.LogError(message);
+
+
+            var job = _dbContext
+                .Jobs
+                .FirstOrDefault(x => x.Id == id);
+
+            if (job is null)
+            {
+                throw new NotFoundException("Job not found");
+            }
+
+            _dbContext.Jobs.Remove(job);
+            _dbContext.SaveChanges();
+        }
+        public void Close(int id, bool isDone)
+        {
+            var job = _dbContext
+                .Jobs
+                .FirstOrDefault(x => x.Id == id);
+
+            if (job is null)
+            {
+                throw new NotFoundException("Job not found");
+            }
+
+            var closedJob = new ClosedJob
+            {
+                Id = job.Id,
+                UserId = job.UserId,
+                CreatedDate = job.CreatedDate,
+                Priority = job.Priority,
+                Description = job.Description,
+                Place = job.Place,
+                Object = job.Object,
+                AdditionalInfo = job.AdditionalInfo,
+                UpdateInfo = job.UpdateInfo,
+                IsDone = isDone,
+                ClosedDate = DateTime.Now,
+                CloseUserId = _userContextService.GetUserId
+            };
+            
+            _dbContext.Jobs.Remove(job);
+            _dbContext.ClosedJobs.Add(closedJob);
+            _dbContext.SaveChanges();
+        }
     }
 }
+
+#pragma warning restore CS8604 // Possible null reference argument.
+#pragma warning restore CS8603 // Possible null reference return.
+#pragma warning restore CA2254 // Template should be a static expression
