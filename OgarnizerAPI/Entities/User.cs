@@ -12,7 +12,8 @@ namespace OgarnizerAPI.Entities
         public virtual Role? Role { get; set; }
 
         public virtual List<Job>? CreatedJobs { get; set; }
-        
+
+        [ForeignKey("FK_ClosedJobs_Users_CloseUserId")]
         public virtual List<ClosedJob>? ClosedJobs { get; set; }
        
         public virtual List<Service>? CreatedServices { get; set; }

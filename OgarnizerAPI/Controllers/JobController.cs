@@ -62,7 +62,7 @@ namespace OgarnizerAPI.Controllers
         }
 
         [HttpPost("{id}")]
-        public ActionResult CloseJob([FromRoute] int id, [FromRoute] bool isDone)
+        public ActionResult CloseJob([FromRoute] int id, [FromQuery] bool isDone)
         {
             _jobService.Close(id, isDone);
 

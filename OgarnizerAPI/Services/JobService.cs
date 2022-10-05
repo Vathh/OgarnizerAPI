@@ -137,7 +137,6 @@ namespace OgarnizerAPI.Services
 
             var closedJob = new ClosedJob
             {
-                Id = job.Id,
                 UserId = job.UserId,
                 CreatedDate = job.CreatedDate,
                 Priority = job.Priority,
