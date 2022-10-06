@@ -10,7 +10,7 @@ namespace OgarnizerAPI.Controllers
 {
     [Route("api/ogarnizer/job")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class JobController : ControllerBase
     {        
         private readonly IJobService _jobService;

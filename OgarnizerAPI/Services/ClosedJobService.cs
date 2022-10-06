@@ -99,7 +99,7 @@ namespace OgarnizerAPI.Services
 
 
             closedJob.UpdateInfo = dto.UpdateInfo;
-            closedJob.UpdateDate = DateTime.Now;
+            closedJob.UpdateDate = dto.UpdateDate;
             _dbContext.SaveChanges();
         }
         public void Delete(int id)
