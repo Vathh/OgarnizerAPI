@@ -53,8 +53,11 @@ try
     builder.Services.AddDbContext<OgarnizerDbContext>();
     builder.Services.AddScoped<OgarnizerSeeder>();
     builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
     builder.Services.AddScoped<IJobService, JobService>();
+    builder.Services.AddScoped<IClosedJobService, ClosedJobService>();
     builder.Services.AddScoped<IAccountService, AccountService>();
+
     builder.Services.AddScoped<ErrorHandlingMiddleware>();
     builder.Services.AddScoped<RequestTimeMiddleware>();
     builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
