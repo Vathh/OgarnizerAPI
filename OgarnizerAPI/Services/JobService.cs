@@ -17,7 +17,10 @@ namespace OgarnizerAPI.Services
         private readonly ILogger<JobService> _logger;
         private readonly IUserContextService _userContextService;
 
-        public JobService(OgarnizerDbContext dbContext, IMapper mapper, ILogger<JobService> logger, IUserContextService userContextService)
+        public JobService(OgarnizerDbContext dbContext, 
+                            IMapper mapper, 
+                            ILogger<JobService> logger, 
+                            IUserContextService userContextService)
         {
             _dbContext = dbContext;
             _mapper = mapper;

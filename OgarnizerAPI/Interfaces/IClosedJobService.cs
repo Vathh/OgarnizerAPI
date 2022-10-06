@@ -4,9 +4,9 @@ namespace OgarnizerAPI.Interfaces
 {
     public interface IClosedJobService
     {
-        PagedResult<ClosedJobDto> GetAll(JobQuery query);
+        PagedResult<ClosedJobDto> GetAll(ClosedJobQuery query);
         ClosedJobDto? GetById(int id);
-        void Delete(int id);
         void Update(int id, UpdateClosedJobDto dto);
+        void Delete(int id);
     }
 }

@@ -60,6 +60,7 @@ try
     builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
     builder.Services.AddScoped<IValidator<CreateUserDto>, CreateUserDtoValidator>();
     builder.Services.AddScoped<IValidator<JobQuery>, JobQueryValidator>();
+    builder.Services.AddScoped<IValidator<ClosedJobQuery>, ClosedJobQueryValidator>();
     builder.Services.AddScoped<IUserContextService, UserContextService>();
     builder.Services.AddHttpContextAccessor();
 

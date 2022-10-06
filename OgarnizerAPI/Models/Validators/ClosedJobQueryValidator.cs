@@ -3,10 +3,10 @@ using OgarnizerAPI.Entities;
 
 namespace OgarnizerAPI.Models.Validators
 {
-    public class ClosedJobQueryValidator : AbstractValidator<JobQuery>
+    public class ClosedJobQueryValidator : AbstractValidator<ClosedJobQuery>
     {
         private readonly int[] allowedPageSizes = new[] { 5, 10, 15 };
-        private readonly string[] allowedSortByColumnNames = { nameof(ClosedJob.Place), nameof(ClosedJob.Object) };
+        private readonly string[] allowedSortByColumnNames = { nameof(ClosedJob.Place), nameof(ClosedJob.Object), nameof(ClosedJob.CreatedDate), nameof(ClosedJob.UpdateDate) };
 
         public ClosedJobQueryValidator()
         {
