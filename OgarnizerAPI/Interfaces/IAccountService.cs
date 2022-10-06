@@ -1,6 +1,4 @@
 ﻿using OgarnizerAPI.Models;
-using OgarnizerAPI.Models.CreateDtos;
-using OgarnizerAPI.Models.User;
 
 namespace OgarnizerAPI.Interfaces
 {

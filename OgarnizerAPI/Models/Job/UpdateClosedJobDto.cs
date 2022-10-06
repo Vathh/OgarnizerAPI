@@ -2,7 +2,7 @@
 
 namespace OgarnizerAPI.Models
 {
-    public class UpdateJobDto
+    public class UpdateClosedJobDto
     {
         [Required]
         [MaxLength(100)]

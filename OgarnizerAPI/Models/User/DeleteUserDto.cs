@@ -1,4 +1,4 @@
-﻿namespace OgarnizerAPI.Models.User
+﻿namespace OgarnizerAPI.Models
 {
     public class DeleteUserDto
     {

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OgarnizerAPI.Entities;
 
@@ -11,9 +12,10 @@ using OgarnizerAPI.Entities;
 namespace OgarnizerAPI.Migrations
 {
     [DbContext(typeof(OgarnizerDbContext))]
-    partial class OgarnizerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221006061328_repaired-fk")]
+    partial class repairedfk
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,9 +61,6 @@ namespace OgarnizerAPI.Migrations
 
                     b.Property<int>("Priority")
                         .HasColumnType("int");
-
-                    b.Property<DateTime>("UpdateDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("UpdateInfo")
                         .HasColumnType("nvarchar(max)");
@@ -114,9 +113,6 @@ namespace OgarnizerAPI.Migrations
                     b.Property<int>("Priority")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("UpdateDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("UpdateInfo")
                         .HasColumnType("nvarchar(max)");
 
@@ -165,9 +161,6 @@ namespace OgarnizerAPI.Migrations
                     b.Property<int>("Priority")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("UpdateDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("UpdateInfo")
                         .HasColumnType("nvarchar(max)");
 
@@ -207,9 +200,6 @@ namespace OgarnizerAPI.Migrations
                     b.Property<int>("Priority")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("UpdateDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("UpdateInfo")
                         .HasColumnType("nvarchar(max)");
 
@@ -248,9 +238,6 @@ namespace OgarnizerAPI.Migrations
 
                     b.Property<int>("Priority")
                         .HasColumnType("int");
-
-                    b.Property<DateTime>("UpdateDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("UpdateInfo")
                         .HasColumnType("nvarchar(max)");
@@ -304,9 +291,6 @@ namespace OgarnizerAPI.Migrations
 
                     b.Property<int>("Priority")
                         .HasColumnType("int");
-
-                    b.Property<DateTime>("UpdateDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("UpdateInfo")
                         .HasColumnType("nvarchar(max)");

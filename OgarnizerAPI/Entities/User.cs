@@ -17,11 +17,13 @@ namespace OgarnizerAPI.Entities
         public virtual List<ClosedJob>? ClosedJobs { get; set; }
        
         public virtual List<Service>? CreatedServices { get; set; }
-       
+
+        [ForeignKey("FK_ClosedServices_Users_CloseUserId")]
         public virtual List<ClosedService>? ClosedServices { get; set; }
         
         public virtual List<Order>? CreatedOrders { get; set; }
-        
+
+        [ForeignKey("FK_ClosedOrders_Users_CloseUserId")]
         public virtual List<ClosedOrder>? ClosedOrders { get; set; } 
 
     }

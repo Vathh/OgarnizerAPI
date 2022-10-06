@@ -64,8 +64,9 @@ namespace OgarnizerAPI.Services
                 var columnsSelectors = new Dictionary<string, Expression<Func<Job, object>>>
                 {
                     {nameof(Job.Place), r => r.Place},
-                    {nameof(Job.Description), r => r.Description},
-                    {nameof(Job.Object), r => r.Object}
+                    {nameof(Job.Object), r => r.Object},
+                    {nameof(Job.CreatedDate), r => r.CreatedDate},
+                    {nameof(Job.UpdateDate), r => r.UpdateDate}
                 };
 
 

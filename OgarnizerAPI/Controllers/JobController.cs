@@ -8,7 +8,7 @@ using OgarnizerAPI.Services;
 
 namespace OgarnizerAPI.Controllers
 {
-    [Route("api/ogarnizer")]
+    [Route("api/ogarnizer/job")]
     [ApiController]
     [Authorize]
     public class JobController : ControllerBase
@@ -25,7 +25,7 @@ namespace OgarnizerAPI.Controllers
         {            
             var id = _jobService.Create(dto); 
 
-            return Created($"/api/ogarnizer/{id}", null);
+            return Created($"/api/ogarnizer/job/{id}", null);
         }
 
         [HttpGet]

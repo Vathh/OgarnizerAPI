@@ -7,6 +7,8 @@ namespace OgarnizerAPI.Models
         [Required]
         public int UserId { get; set; }
 
+        public DateTime CreatedDate = DateTime.Now;
+
         [Required]
         [Range(1,3)]
         public int Priority { get; set; }

@@ -2,8 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using OgarnizerAPI.Interfaces;
 using OgarnizerAPI.Models;
-using OgarnizerAPI.Models.CreateDtos;
-using OgarnizerAPI.Models.User;
 
 namespace OgarnizerAPI.Controllers
 {

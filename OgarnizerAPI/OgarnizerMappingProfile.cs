@@ -11,9 +11,9 @@ namespace OgarnizerAPI
         {
             CreateMap<User, UserDto>();
 
-            CreateMap<Job, JobDto>()
-                .ForMember(r => r.CreatedDate,
-                    c => c.MapFrom(entity => new DateTimeOffset(entity.CreatedDate).ToUnixTimeMilliseconds()));
+            CreateMap<Job, JobDto>();
+                //.ForMember(r => r.CreatedDate,
+                    //c => c.MapFrom(entity => new DateTimeOffset(entity.CreatedDate).ToUnixTimeMilliseconds()));
 
             CreateMap<Service, ServiceDto>();
 

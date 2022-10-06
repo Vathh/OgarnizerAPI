@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace OgarnizerAPI.Models.CreateDtos
+namespace OgarnizerAPI.Models
 {
     public class CreateUserDto
     {

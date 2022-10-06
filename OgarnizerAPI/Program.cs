@@ -9,7 +9,6 @@ using OgarnizerAPI.Entities;
 using OgarnizerAPI.Interfaces;
 using OgarnizerAPI.Middleware;
 using OgarnizerAPI.Models;
-using OgarnizerAPI.Models.CreateDtos;
 using OgarnizerAPI.Models.Validators;
 using OgarnizerAPI.Services;
 using System.Reflection;

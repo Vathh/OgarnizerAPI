@@ -8,8 +8,6 @@ using OgarnizerAPI.Entities;
 using OgarnizerAPI.Exceptions;
 using OgarnizerAPI.Interfaces;
 using OgarnizerAPI.Models;
-using OgarnizerAPI.Models.CreateDtos;
-using OgarnizerAPI.Models.User;
 
 namespace OgarnizerAPI.Services
 {

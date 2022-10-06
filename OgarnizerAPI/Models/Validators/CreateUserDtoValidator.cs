@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 using OgarnizerAPI.Entities;
-using OgarnizerAPI.Models.CreateDtos;
+using OgarnizerAPI.Models;
 
 namespace OgarnizerAPI.Models.Validators
 {

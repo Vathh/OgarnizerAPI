@@ -11,5 +11,6 @@
         public string? Object { get; set; }
         public string? AdditionalInfo { get; set; }
         public string? UpdateInfo { get; set; }
+        public DateTime UpdateDate { get; set; }
     }
 }
