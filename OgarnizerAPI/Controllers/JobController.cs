@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OgarnizerAPI.Entities;
+using OgarnizerAPI.Interfaces;
 using OgarnizerAPI.Models;
 using OgarnizerAPI.Services;
 
@@ -21,7 +22,7 @@ namespace OgarnizerAPI.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateJob([FromBody] CreateOrderDto dto)
+        public ActionResult CreateJob([FromBody] CreateJobDto dto)
         {            
             var id = _jobService.Create(dto); 
 
@@ -29,7 +30,7 @@ namespace OgarnizerAPI.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<JobDto>> GetAll([FromQuery] OrderQuery query)
+        public ActionResult<IEnumerable<JobDto>> GetAll([FromQuery] JobQuery query)
         {
             var jobsDtos = _jobService.GetAll(query);
 
@@ -46,7 +47,7 @@ namespace OgarnizerAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        public ActionResult Update([FromRoute] int id, [FromBody] UpdateOrderDto dto)
+        public ActionResult Update([FromRoute] int id, [FromBody] UpdateJobDto dto)
         {
             _jobService.Update(id, dto);
 

@@ -16,7 +16,7 @@ namespace OgarnizerAPI.Entities
         public DateTime UpdateDate { get; set; }
         public bool IsDone { get; set; }
         public DateTime ClosedDate { get; set; }
-        public int CloseUserId { get; set; }
+        public int? CloseUserId { get; set; }
        public virtual User? CloseUser { get; set; }
     }
 }

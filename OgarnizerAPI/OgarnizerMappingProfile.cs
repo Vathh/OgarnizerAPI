@@ -18,7 +18,7 @@ namespace OgarnizerAPI
             //.ForMember(r => r.CreatedDate,
             //c => c.MapFrom(entity => new DateTimeOffset(entity.CreatedDate).ToUnixTimeMilliseconds()));
 
-            CreateMap<CreateOrderDto, Job>()
+            CreateMap<CreateJobDto, Job>()
                 .ForMember(r => r.CreatedDate,
                     c => c.MapFrom(dto => DateTime.Now));
             #endregion
@@ -41,6 +41,10 @@ namespace OgarnizerAPI
 
             #region Order
             CreateMap<Order, OrderDto>();
+
+            CreateMap<CreateOrderDto, Order>()
+                .ForMember(r => r.CreatedDate,
+                    c => c.MapFrom(dto => DateTime.Now));
             #endregion
 
             #region ClosedOrder

@@ -3,6 +3,7 @@ using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using OgarnizerAPI.Entities;
 using OgarnizerAPI.Exceptions;
+using OgarnizerAPI.Interfaces;
 using OgarnizerAPI.Models;
 
 namespace OgarnizerAPI.Services
@@ -27,7 +28,7 @@ namespace OgarnizerAPI.Services
             _logger = logger;
             _userContextService = userContextService;
         }
-        public int Create(CreateOrderDto dto)
+        public int Create(CreateJobDto dto)
         {
             var job = _mapper.Map<Job>(dto);
             _dbContext.Jobs.Add(job);
@@ -51,7 +52,7 @@ namespace OgarnizerAPI.Services
             return result;
         }
 
-        public PagedResult<JobDto> GetAll(OrderQuery query)
+        public PagedResult<JobDto> GetAll(JobQuery query)
         {
 
             var baseQuery = _dbContext
@@ -93,7 +94,7 @@ namespace OgarnizerAPI.Services
 
             return result;
         }
-        public void Update(int id, UpdateOrderDto dto)
+        public void Update(int id, UpdateJobDto dto)
         {
 
             var job = _dbContext

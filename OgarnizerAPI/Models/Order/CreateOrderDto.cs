@@ -17,7 +17,7 @@ namespace OgarnizerAPI.Models
         public string? Description { get; set; }
 
         [Required]
-        public string? Place { get; set; }
+        public string? Client { get; set; }
 
         [Required]
         public string? Object { get; set; }

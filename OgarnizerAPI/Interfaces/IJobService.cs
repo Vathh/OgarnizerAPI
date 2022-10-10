@@ -1,14 +1,14 @@
 ﻿using OgarnizerAPI.Models;
 
-namespace OgarnizerAPI.Services
+namespace OgarnizerAPI.Interfaces
 {
     public interface IJobService
     {
-        int Create(CreateOrderDto dto);
-        PagedResult<JobDto> GetAll(OrderQuery query);
+        int Create(CreateJobDto dto);
+        PagedResult<JobDto> GetAll(JobQuery query);
         JobDto? GetById(int id);    
         void Delete(int id);    
-        void Update(int id, UpdateOrderDto dto); 
+        void Update(int id, UpdateJobDto dto); 
 
         void Close(int id, bool isDone);
     }
