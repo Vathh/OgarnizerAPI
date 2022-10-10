@@ -59,6 +59,7 @@ try
     builder.Services.AddScoped<IServiceService, ServiceService>();
     builder.Services.AddScoped<IClosedServiceService, ClosedServiceService>();
     builder.Services.AddScoped<IOrderService, OrderService>();
+    builder.Services.AddScoped<IClosedOrderService, ClosedOrderService>();
     builder.Services.AddScoped<IAccountService, AccountService>();
 
     builder.Services.AddScoped<ErrorHandlingMiddleware>();
@@ -71,6 +72,7 @@ try
     builder.Services.AddScoped<IValidator<ServiceQuery>, ServiceQueryValidator>();
     builder.Services.AddScoped<IValidator<ClosedServiceQuery>, ClosedServiceQueryValidator>();
     builder.Services.AddScoped<IValidator<OrderQuery>, OrderQueryValidator>();
+    builder.Services.AddScoped<IValidator<ClosedOrderQuery>, ClosedOrderQueryValidator>();
 
     builder.Services.AddScoped<IUserContextService, UserContextService>();
     builder.Services.AddHttpContextAccessor();
