@@ -27,7 +27,7 @@ namespace OgarnizerAPI.Services
             _logger = logger;
             _userContextService = userContextService;
         }
-        public int Create(CreateJobDto dto)
+        public int Create(CreateOrderDto dto)
         {
             var job = _mapper.Map<Job>(dto);
             _dbContext.Jobs.Add(job);
@@ -51,7 +51,7 @@ namespace OgarnizerAPI.Services
             return result;
         }
 
-        public PagedResult<JobDto> GetAll(JobQuery query)
+        public PagedResult<JobDto> GetAll(OrderQuery query)
         {
 
             var baseQuery = _dbContext
@@ -93,7 +93,7 @@ namespace OgarnizerAPI.Services
 
             return result;
         }
-        public void Update(int id, UpdateJobDto dto)
+        public void Update(int id, UpdateOrderDto dto)
         {
 
             var job = _dbContext

@@ -3,12 +3,12 @@ using OgarnizerAPI.Entities;
 
 namespace OgarnizerAPI.Models.Validators
 {
-    public class ServiceQueryValidator : AbstractValidator<ServiceQuery>
+    public class ClosedServiceQueryValidator : AbstractValidator<ClosedServiceQuery>
     {
         private readonly int[] allowedPageSizes = new[] { 5, 10, 15 };
-        private readonly string[] allowedSortByColumnNames = { nameof(Service.Object), nameof(Service.CreatedDate), nameof(Service.UpdateDate)};
+        private readonly string[] allowedSortByColumnNames = { nameof(ClosedService.Object), nameof(ClosedService.CreatedDate), nameof(ClosedService.UpdateDate)};
 
-        public ServiceQueryValidator()
+        public ClosedServiceQueryValidator()
         {
             RuleFor(r => r.PageNumber).GreaterThanOrEqualTo(1);
 
@@ -26,4 +26,3 @@ namespace OgarnizerAPI.Models.Validators
         }
     }
 }
-

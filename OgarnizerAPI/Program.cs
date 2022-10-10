@@ -57,6 +57,7 @@ try
     builder.Services.AddScoped<IJobService, JobService>();
     builder.Services.AddScoped<IClosedJobService, ClosedJobService>();
     builder.Services.AddScoped<IServiceService, ServiceService>();
+    builder.Services.AddScoped<IClosedServiceService, ClosedServiceService>();
     builder.Services.AddScoped<IAccountService, AccountService>();
 
     builder.Services.AddScoped<ErrorHandlingMiddleware>();
@@ -64,9 +65,10 @@ try
     builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 
     builder.Services.AddScoped<IValidator<CreateUserDto>, CreateUserDtoValidator>();
-    builder.Services.AddScoped<IValidator<JobQuery>, JobQueryValidator>();
+    builder.Services.AddScoped<IValidator<OrderQuery>, JobQueryValidator>();
     builder.Services.AddScoped<IValidator<ClosedJobQuery>, ClosedJobQueryValidator>();
     builder.Services.AddScoped<IValidator<ServiceQuery>, ServiceQueryValidator>();
+    builder.Services.AddScoped<IValidator<ClosedServiceQuery>, ClosedServiceQueryValidator>();
 
     builder.Services.AddScoped<IUserContextService, UserContextService>();
     builder.Services.AddHttpContextAccessor();

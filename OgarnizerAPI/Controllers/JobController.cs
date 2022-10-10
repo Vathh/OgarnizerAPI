@@ -21,7 +21,7 @@ namespace OgarnizerAPI.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateJob([FromBody] CreateJobDto dto)
+        public ActionResult CreateJob([FromBody] CreateOrderDto dto)
         {            
             var id = _jobService.Create(dto); 
 
@@ -29,7 +29,7 @@ namespace OgarnizerAPI.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<JobDto>> GetAll([FromQuery] JobQuery query)
+        public ActionResult<IEnumerable<JobDto>> GetAll([FromQuery] OrderQuery query)
         {
             var jobsDtos = _jobService.GetAll(query);
 
@@ -37,7 +37,7 @@ namespace OgarnizerAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public ActionResult<JobDto> Get([FromRoute] int id)
         {
             var job = _jobService.GetById(id);
@@ -46,7 +46,7 @@ namespace OgarnizerAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        public ActionResult Update([FromRoute] int id, [FromBody] UpdateJobDto dto)
+        public ActionResult Update([FromRoute] int id, [FromBody] UpdateOrderDto dto)
         {
             _jobService.Update(id, dto);
 
