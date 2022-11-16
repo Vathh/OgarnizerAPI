@@ -9,5 +9,7 @@ namespace OgarnizerAPI.Models
         public string? UpdateInfo { get; set; }
 
         public DateTime UpdateDate = DateTime.Now;
+
+        public bool ToInvoice { get; set; }
     }
 }

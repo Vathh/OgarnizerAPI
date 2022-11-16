@@ -20,7 +20,9 @@ namespace OgarnizerAPI
 
             CreateMap<CreateJobDto, Job>()
                 .ForMember(r => r.CreatedDate,
-                    c => c.MapFrom(dto => DateTime.Now));
+                    c => c.MapFrom(dto => DateTime.Now))
+                .ForMember(r => r.ToInvoice,
+                    c => c.MapFrom(dto => false));
             #endregion
 
             #region ClosedJob
@@ -32,7 +34,11 @@ namespace OgarnizerAPI
 
             CreateMap<CreateServiceDto, Service>()
                 .ForMember(r => r.CreatedDate,
-                    c => c.MapFrom(dto => DateTime.Now));
+                    c => c.MapFrom(dto => DateTime.Now))
+                .ForMember(r => r.ToInvoice,
+                    c => c.MapFrom(dto => false))
+                .ForMember(r => r.ForRelease,
+                    c => c.MapFrom(dto => false));
             #endregion
 
             #region ClosedService
@@ -44,7 +50,11 @@ namespace OgarnizerAPI
 
             CreateMap<CreateOrderDto, Order>()
                 .ForMember(r => r.CreatedDate,
-                    c => c.MapFrom(dto => DateTime.Now));
+                    c => c.MapFrom(dto => DateTime.Now))
+                .ForMember(r => r.ToInvoice,
+                    c => c.MapFrom(dto => false))
+                .ForMember(r => r.ForRelease,
+                    c => c.MapFrom(dto => false));
             #endregion
 
             #region ClosedOrder

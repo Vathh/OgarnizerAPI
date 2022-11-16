@@ -7,7 +7,6 @@ namespace OgarnizerAPI.Models
         [Required]
         [MaxLength(100)]
         public string? UpdateInfo { get; set; }
-
         public DateTime UpdateDate = DateTime.Now;
     }
 }

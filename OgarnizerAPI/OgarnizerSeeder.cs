@@ -146,7 +146,7 @@ namespace OgarnizerAPI
             {
                 new ClosedJob()
                 {
-                    UserId = 7,
+                    UserId = 2,
                     CreatedDate = new DateTime(2022,1,11),
                     Priority = 2,
                     Description = "Makao",
@@ -156,11 +156,12 @@ namespace OgarnizerAPI
                     UpdateInfo = "",
                     IsDone = true,
                     ClosedDate = new DateTime(2022,1,15),
-                    CloseUserId = 6
+                    CloseUserId = 1,
+                    ToInvoice = true
                 },
                 new ClosedJob()
                 {
-                    UserId = 5,
+                    UserId = 1,
                     CreatedDate = new DateTime(2022,2,11),
                     Priority = 3,
                     Description = "Ciasto z dziąsłem",
@@ -170,7 +171,8 @@ namespace OgarnizerAPI
                     UpdateInfo = "",
                     IsDone = false,
                     ClosedDate = new DateTime(2022,11,2),
-                    CloseUserId = 7
+                    CloseUserId = 3,
+                    ToInvoice = true
                 }
             };
 
@@ -183,36 +185,39 @@ namespace OgarnizerAPI
             {
                 new Job()
                 {
-                    UserId = 5,
+                    UserId = 1,
                     CreatedDate = new DateTime(2022,6,11),
                     Priority = 1,
                     Description = "Wymiana bębna Padma",
                     Place = "Padma 3.0 magazyn",
                     Object = "BIZHUB 223",
                     AdditionalInfo = "Brudzi, sprawdzic beben i transfer",
-                    UpdateInfo = ""
+                    UpdateInfo = "",
+                    ToInvoice = false
                 },
                 new Job()
                 {
-                    UserId = 6,
+                    UserId = 2,
                     CreatedDate = new DateTime(2022,10,9),
                     Priority = 2,
                     Description = "Naprawa finiszera Krystyny",
                     Place = "Utrata 2c/50",
                     Object = "BIZHUB C368",
                     AdditionalInfo = "Finiszer wyrzuca blad C-0512",
-                    UpdateInfo = ""
+                    UpdateInfo = "",
+                    ToInvoice = false
                 },
                 new Job()
                 {
-                    UserId = 7,
+                    UserId = 3,
                     CreatedDate = new DateTime(2022,2,11),
                     Priority = 3,
                     Description = "Lotto Augustów",
                     Place = "",
                     Object = "",
                     AdditionalInfo = "",
-                    UpdateInfo = ""
+                    UpdateInfo = "",
+                    ToInvoice = true
                 }
             };
 
@@ -225,33 +230,39 @@ namespace OgarnizerAPI
             {
                 new Service()
                 {
-                    UserId = 5,
+                    UserId = 1,
                     CreatedDate = new DateTime(2022,3,25),
                     Priority = 1,
                     Description = "Naprawa drukarki KRAM",
                     Object = "HP 2055",
                     AdditionalInfo = "zacina duplex",
-                    UpdateInfo = ""
+                    UpdateInfo = "",
+                    ToInvoice = false,
+                    ForRelease = false
                 },
                 new Service()
                 {
-                    UserId = 6,
+                    UserId = 2,
                     CreatedDate = new DateTime(2022,1,16),
                     Priority = 2,
                     Description = "Naprawa laptopa Mietka",
                     Object = "dell latitude 7490",
                     AdditionalInfo = "zepsuty wiatrak chyba bo trzeszczy",
-                    UpdateInfo = ""
+                    UpdateInfo = "",
+                    ToInvoice = false,
+                    ForRelease = true
                 },
                 new Service()
                 {
-                    UserId = 7,
+                    UserId = 3,
                     CreatedDate = new DateTime(2022,1,18),
                     Priority = 3,
                     Description = "Zamknac zlecenia lotto",
                     Object = "",
                     AdditionalInfo = "",
-                    UpdateInfo = ""
+                    UpdateInfo = "",
+                    ToInvoice = true,
+                    ForRelease = true
                 }
             };
 
@@ -264,7 +275,7 @@ namespace OgarnizerAPI
             {
                 new ClosedService()
                 {
-                    UserId = 6,
+                    UserId = 2,
                     CreatedDate = new DateTime(2022,2,15),
                     Priority = 2,
                     Description = "Zawiasy w laptopie Mariana",
@@ -273,11 +284,13 @@ namespace OgarnizerAPI
                     UpdateInfo = "",
                     IsDone = false,
                     ClosedDate = new DateTime(2022,3,15),
-                    CloseUserId = 5
+                    CloseUserId = 1,
+                    ToInvoice = true,
+                    ForRelease = true
                 },
                 new ClosedService()
                 {
-                    UserId = 7,
+                    UserId = 3,
                     CreatedDate = new DateTime(2022,1,23),
                     Priority = 3,
                     Description = "Czyszczenie maszyny do klienta",
@@ -286,7 +299,9 @@ namespace OgarnizerAPI
                     UpdateInfo = "",
                     IsDone = true,
                     ClosedDate = new DateTime(2022,2,20),
-                    CloseUserId = 6
+                    CloseUserId = 2,
+                    ToInvoice = true,
+                    ForRelease = true
                 }
             };
 
@@ -299,36 +314,42 @@ namespace OgarnizerAPI
             {
                 new Order()
                 {
-                    UserId = 6,
+                    UserId = 2,
                     CreatedDate = new DateTime(2022,6,11),
                     Priority = 1,
                     Description = "Bateria do laptopa bogdana mariana",
                     Client = "bogdan marian",
                     Object = "hp eq2152nw SN12345561",
                     AdditionalInfo = "poszukac baterii, jak tansza niz 200 to zamowic",
-                    UpdateInfo = ""
+                    UpdateInfo = "",
+                    ToInvoice = false,
+                    ForRelease = false
                 },
                 new Order()
                 {
-                    UserId = 5,
+                    UserId = 1,
                     CreatedDate = new DateTime(2022,6,7),
                     Priority = 2,
                     Description = "toner do HP2055",
                     Client = "kram",
                     Object = "hp2055",
                     AdditionalInfo = "potrzebujemy 15 sztuk",
-                    UpdateInfo = ""
+                    UpdateInfo = "",
+                    ToInvoice = false,
+                    ForRelease = true
                 },
                 new Order()
                 {
-                    UserId = 7,
+                    UserId = 3,
                     CreatedDate = new DateTime(2022,6,22),
                     Priority = 3,
                     Description = "Toner TN312K",
                     Client = "andrzejek",
                     Object = "bizhub c258",
                     AdditionalInfo = "do pttk suwalki kosciuszki",
-                    UpdateInfo = ""
+                    UpdateInfo = "",
+                    ToInvoice = true,
+                    ForRelease = true
                 }
             };
 
@@ -341,7 +362,7 @@ namespace OgarnizerAPI
             {
                 new ClosedOrder()
                 {
-                    UserId = 7,
+                    UserId = 3,
                     CreatedDate = new DateTime(2022,6,22),
                     Priority = 2,
                     Description = "Ciasto z masłem",
@@ -351,11 +372,13 @@ namespace OgarnizerAPI
                     UpdateInfo = "",
                     IsDone = true,
                     ClosedDate = new DateTime(2022,6,27),
-                    CloseUserId = 8
+                    CloseUserId = 4,
+                    ToInvoice = true,
+                    ForRelease = true
                 },
                 new ClosedOrder()
                 {
-                    UserId = 7,
+                    UserId = 3,
                     CreatedDate = new DateTime(2022,6,23),
                     Priority = 3,
                     Description = "kartofle",
@@ -365,7 +388,9 @@ namespace OgarnizerAPI
                     UpdateInfo = "",
                     IsDone = false,
                     ClosedDate = new DateTime(2022,6,24),
-                    CloseUserId = 8
+                    CloseUserId = 4,
+                    ToInvoice = true,
+                    ForRelease = true
                 }
             };
 
