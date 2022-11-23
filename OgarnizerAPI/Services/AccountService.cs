@@ -63,18 +63,7 @@ namespace OgarnizerAPI.Services
         {
             var user = _dbContext.Users
                 .Include(u => u.Role)
-                .FirstOrDefault(u => u.Login == dto.Login);
-
-            if(user is null)
-            {
-                throw new BadRequestException("Invalid login or password");
-            }
-
-            var result = _passwordHasher.VerifyHashedPassword(user, user.PasswordHash, dto.Password);
-            if(result == PasswordVerificationResult.Failed)
-            {
-                throw new BadRequestException("Invalid login or password");
-            }
+                .FirstOrDefault(u => u.Login == dto.Login);            
 
             var claims = new List<Claim>()
             {
@@ -82,7 +71,6 @@ namespace OgarnizerAPI.Services
                 new Claim(ClaimTypes.Name, user.Name.ToString()),
                 new Claim(ClaimTypes.Role, user.Role.Name.ToString())
             };
-
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_authenticationSettings.JwtKey));
 
@@ -107,6 +95,20 @@ namespace OgarnizerAPI.Services
             {
                 throw new BadRequestException("Invalid login or password");
             }
+
+            var result = _passwordHasher.VerifyHashedPassword(user, user.PasswordHash, dto.Password);
+            if (result == PasswordVerificationResult.Failed)
+            {
+                throw new BadRequestException("Invalid login or password");
+            }
+
+            var userResponse = new LoginUserResponseDto
+            {
+                Name = user.Name,
+                JWT = GenerateJwt(dto)
+            };
+
+            return userResponse;
         }
     }
 }

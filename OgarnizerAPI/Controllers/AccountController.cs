@@ -18,7 +18,7 @@ namespace OgarnizerAPI.Controllers
         }
 
         [HttpPost("register")]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public ActionResult CreateUser([FromBody]CreateUserDto dto)
         {
             _accountService.CreateUser(dto);
@@ -30,8 +30,8 @@ namespace OgarnizerAPI.Controllers
         [AllowAnonymous]
         public ActionResult Login([FromBody]LoginUserDto dto)
         {
-            var token = _accountService.GenerateJwt(dto);
-            return Ok(token);
+            var userResponse = _accountService.Login(dto);
+            return Ok(userResponse);
         }
 
         [HttpPost("delete")]

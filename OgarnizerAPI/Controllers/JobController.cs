@@ -30,6 +30,7 @@ namespace OgarnizerAPI.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public ActionResult<IEnumerable<JobDto>> GetAll([FromQuery] JobQuery query)
         {
             var jobsDtos = _jobService.GetAll(query);
