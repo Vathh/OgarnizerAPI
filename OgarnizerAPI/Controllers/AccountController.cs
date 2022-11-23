@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using OgarnizerAPI.Interfaces;
 using OgarnizerAPI.Models;
@@ -26,6 +27,7 @@ namespace OgarnizerAPI.Controllers
         }
 
         [HttpPost("login")]
+        [AllowAnonymous]
         public ActionResult Login([FromBody]LoginUserDto dto)
         {
             var token = _accountService.GenerateJwt(dto);

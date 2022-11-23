@@ -83,10 +83,12 @@ try
     {
         options.AddPolicy("FrontEndClient", builder =>
         {
-            builder.AllowAnyMethod()
-                .AllowAnyHeader()
+            builder.WithOrigins("*")
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+                
                 //.WithOrigins(Configuration["AllowedOrigins"]);
-                .AllowAnyOrigin();
+                //.AllowAnyOrigin();
         });
     });
 
@@ -102,7 +104,7 @@ try
 
     app.UseResponseCaching();
     app.UseStaticFiles();
-    app.UseCors("FronEndClient");
+    app.UseCors("FrontEndClient");
 
     seeder.Seed();
 

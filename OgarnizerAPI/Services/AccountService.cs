@@ -98,6 +98,16 @@ namespace OgarnizerAPI.Services
             var tokenHandler = new JwtSecurityTokenHandler();
             return tokenHandler.WriteToken(token);
         }
+
+        public LoginUserResponseDto Login(LoginUserDto dto)
+        {
+            var user = _dbContext.Users.FirstOrDefault(x => x.Login == dto.Login);
+
+            if (user is null)
+            {
+                throw new BadRequestException("Invalid login or password");
+            }
+        }
     }
 }
 #pragma warning restore CS8604 // Possible null reference argument.

@@ -7,5 +7,6 @@ namespace OgarnizerAPI.Interfaces
         void CreateUser(CreateUserDto dto);
         void DeleteUser(DeleteUserDto dto);
         string GenerateJwt(LoginUserDto dto);
+        LoginUserResponseDto? Login(LoginUserDto dto);
     }
 }
